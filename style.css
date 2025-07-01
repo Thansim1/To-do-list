@@ -1,0 +1,124 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #0077b6, #0096c7);
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.container {
+  background-color: #023e8a;
+  padding: 2rem;
+  border-radius: 20px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.25);
+  animation: fadeIn 0.8s ease;
+}
+
+/* Heading */
+h1 {
+  text-align: center;
+  margin-bottom: 1.2rem;
+  color: #ffe600;
+}
+
+/* Summary */
+.summary {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+/* Form */
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+input, select {
+  padding: 0.7rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  flex: 1;
+}
+button {
+  padding: 0.7rem 1.2rem;
+  background-color: #ffe600;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+button:hover {
+  background-color: #fff200;
+}
+
+/* Task List */
+ul#task-list {
+  list-style: none;
+  margin-top: 1rem;
+}
+ul#task-list li {
+  background-color: #03045e;
+  color: white;
+  padding: 0.8rem;
+  border-radius: 8px;
+  margin-bottom: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+  animation: slideUp 0.4s ease;
+}
+ul#task-list li.completed {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+.task-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.task-meta {
+  font-size: 0.85rem;
+  color: #aad9ff;
+  margin-top: 0.3rem;
+  display: flex;
+  gap: 1rem;
+}
+.priority-low { color: #00b4d8; }
+.priority-medium { color: #ffd500; }
+.priority-high { color: #ff4d4d; }
+
+li button {
+  background: transparent;
+  border: none;
+  color: #ffe600;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+li button:hover {
+  color: #ffffff;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
