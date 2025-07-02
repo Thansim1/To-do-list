@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div id="background"></div>
   <div id="particles-js"></div>
 
   <div class="container">
@@ -22,13 +23,11 @@
 
     <form id="task-form">
       <input type="text" id="task-input" placeholder="Enter a new task..." required />
-
       <select id="priority-select">
         <option value="Low">Low 🔵</option>
         <option value="Medium">Medium 🟡</option>
         <option value="High">High 🔴</option>
       </select>
-
       <select id="repeat-select">
         <option value="None">No Repeat</option>
         <option value="Daily">Daily</option>
@@ -36,7 +35,7 @@
         <option value="Monthly">Monthly</option>
         <option value="Yearly">Yearly</option>
       </select>
-
+      <input type="date" id="due-date" />
       <button type="submit">Add</button>
     </form>
 
