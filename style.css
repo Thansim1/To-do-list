@@ -1,51 +1,93 @@
+/* === Base Reset === */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 html, body {
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to right, #0077b6, #0096c7);
-  color: #fff;
+  background: linear-gradient(-45deg, #ffe600, #ffe600); /* Light mode yellow static with subtle animation */
+  background-size: 400% 400%;
+  animation: animatedGradient 15s ease infinite;
+  color: #1e1e1e;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2rem;
+  position: relative;
+  transition: background 0.3s, color 0.3s;
+}
+
+body.dark {
+  background: linear-gradient(-45deg, #0d0d0d, #1a1a1a, #2c2c2c, #1a1a1a); /* Dark mode animated */
+  background-size: 400% 400%;
+  animation: animatedGradient 15s ease infinite;
+  color: #eee;
+}
+
+@keyframes animatedGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+#particles-js {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  top: 0;
+  left: 0;
 }
 
 .container {
-  background-color: #023e8a;
+  background-color: #023e8a; /* Blue task box */
   padding: 2rem;
   border-radius: 20px;
   max-width: 600px;
   width: 100%;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.25);
-  animation: fadeIn 0.8s ease;
 }
 
-/* Heading */
+body.dark .container {
+  background-color: #1e1e1e;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 h1 {
-  text-align: center;
-  margin-bottom: 1.2rem;
   color: #ffe600;
 }
 
-/* Summary */
+#toggle-theme {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #ffe600;
+}
+
 .summary {
   display: flex;
   justify-content: space-between;
   margin-bottom: 1rem;
   font-weight: bold;
+  color: #fff;
 }
 
-/* Form */
 form {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-bottom: 1rem;
 }
+
 input, select {
   padding: 0.7rem;
   border: none;
@@ -53,6 +95,7 @@ input, select {
   font-size: 1rem;
   flex: 1;
 }
+
 button {
   padding: 0.7rem 1.2rem;
   background-color: #ffe600;
@@ -62,15 +105,16 @@ button {
   cursor: pointer;
   transition: background 0.3s;
 }
+
 button:hover {
   background-color: #fff200;
 }
 
-/* Task List */
 ul#task-list {
   list-style: none;
   margin-top: 1rem;
 }
+
 ul#task-list li {
   background-color: #03045e;
   color: white;
@@ -80,17 +124,19 @@ ul#task-list li {
   display: flex;
   flex-direction: column;
   transition: transform 0.3s ease;
-  animation: slideUp 0.4s ease;
 }
+
 ul#task-list li.completed {
   text-decoration: line-through;
   opacity: 0.6;
 }
+
 .task-main {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
 .task-meta {
   font-size: 0.85rem;
   color: #aad9ff;
@@ -98,6 +144,7 @@ ul#task-list li.completed {
   display: flex;
   gap: 1rem;
 }
+
 .priority-low { color: #00b4d8; }
 .priority-medium { color: #ffd500; }
 .priority-high { color: #ff4d4d; }
@@ -110,15 +157,16 @@ li button {
   cursor: pointer;
   margin-left: 0.5rem;
 }
+
 li button:hover {
   color: #ffffff;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(15px); }
-  to { opacity: 1; transform: translateY(0); }
+.editable {
+  background-color: transparent;
+  border: 1px dashed #ffffff;
+  padding: 0.2rem;
+  color: inherit;
+  font-size: 1rem;
+  width: 100%;
 }

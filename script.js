@@ -5,6 +5,32 @@ const repeatSelect = document.getElementById("repeat-select");
 const taskList = document.getElementById("task-list");
 const totalCount = document.getElementById("total-count");
 const completedCount = document.getElementById("completed-count");
+const toggleTheme = document.getElementById("toggle-theme");
+
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme === "dark") document.body.classList.add("dark");
+
+if (toggleTheme) {
+  toggleTheme.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+    localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
+  });
+}
+
+particlesJS("particles-js", {
+  particles: {
+    number: { value: 40 },
+    color: { value: "#ffffff" },
+    shape: { type: "circle" },
+    opacity: { value: 0.3 },
+    size: { value: 3 },
+    move: { enable: true, speed: 1.2 }
+  },
+  interactivity: {
+    events: { onhover: { enable: true, mode: "repulse" } },
+    modes: { repulse: { distance: 100 } }
+  }
+});
 
 document.addEventListener("DOMContentLoaded", loadTasks);
 
@@ -26,9 +52,13 @@ function addTask(text, priority, repeat, completed = false) {
 
   const top = document.createElement("div");
   top.className = "task-main";
-  top.innerHTML = `<span>${text}</span>`;
+
+  const span = document.createElement("span");
+  span.textContent = text;
+  span.onclick = () => editTask(span);
 
   const buttons = document.createElement("span");
+
   const doneBtn = document.createElement("button");
   doneBtn.innerHTML = "✔️";
   doneBtn.title = "Complete";
@@ -47,6 +77,7 @@ function addTask(text, priority, repeat, completed = false) {
 
   buttons.appendChild(doneBtn);
   buttons.appendChild(delBtn);
+  top.appendChild(span);
   top.appendChild(buttons);
 
   const meta = document.createElement("div");
@@ -60,6 +91,24 @@ function addTask(text, priority, repeat, completed = false) {
   li.appendChild(meta);
   taskList.appendChild(li);
   updateSummary();
+}
+
+function editTask(span) {
+  const input = document.createElement("input");
+  input.type = "text";
+  input.value = span.textContent;
+  input.classList.add("editable");
+  input.onblur = () => {
+    if (input.value.trim() !== "") {
+      span.textContent = input.value.trim();
+      updateStorage();
+    } else {
+      span.textContent = input.value;
+    }
+    span.onclick = () => editTask(span);
+  };
+  span.replaceWith(input);
+  input.focus();
 }
 
 function getTasks() {
